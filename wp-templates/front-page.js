@@ -74,7 +74,7 @@ export default function Component() {
                       <div
                         className={styles.card__desc}
                         dangerouslySetInnerHTML={{
-                          __html: post.node.excerpt.substring(0, 100),
+                          __html: post.node.excerpt.substring(0, 120),
                         }}
                       />
                     </div>
