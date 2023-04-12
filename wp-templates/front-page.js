@@ -11,12 +11,8 @@ import {
   Post,
   SEO,
 } from '../components';
-<<<<<<< HEAD
-import Link from 'next/link';
-=======
 import styles from "../components/Post/Post.module.scss";
 import Link from "next/link";
->>>>>>> 5c29d20 (home)
 
 export default function Component() {
   const { data } = useQuery(Component.query, {
@@ -27,13 +23,8 @@ export default function Component() {
     data?.generalSettings;
   const primaryMenu = data?.headerMenuItems?.nodes ?? [];
   const footerMenu = data?.footerMenuItems?.nodes ?? [];
-<<<<<<< HEAD
   const allStories = data?.allPosts?.edges ?? [];
   console.log(allStories)
-=======
-  const posts = data?.allPosts?.edges ?? [];
-  // console.log(stories);
->>>>>>> 5c29d20 (home)
 
   return (
     <>
@@ -46,7 +37,7 @@ export default function Component() {
       <Main>
         <Container>
           <div className={styles.card__container}>
-            {posts.map((post) => {
+            {allStories.map((post) => {
               console.log(post)
               return (
                 <Link index={post.id} href={post.node.uri}>
@@ -74,7 +65,7 @@ export default function Component() {
                       <div
                         className={styles.card__desc}
                         dangerouslySetInnerHTML={{
-                          __html: post.node.excerpt.substring(0, 120),
+                          __html: post.node.excerpt.substring(0, 100),
                         }}
                       />
                     </div>
