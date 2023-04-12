@@ -1,3 +1,3 @@
-# faust-getting-started
+# Goal Line Extended Website
 
-Welcome to the experimental Faust getting started example.
+Welcome to the GLE's codebase.

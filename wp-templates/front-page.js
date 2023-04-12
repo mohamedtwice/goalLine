@@ -8,9 +8,15 @@ import {
   Container,
   NavigationMenu,
   Hero,
+  Post,
   SEO,
 } from '../components';
+<<<<<<< HEAD
 import Link from 'next/link';
+=======
+import styles from "../components/Post/Post.module.scss";
+import Link from "next/link";
+>>>>>>> 5c29d20 (home)
 
 export default function Component() {
   const { data } = useQuery(Component.query, {
@@ -21,8 +27,13 @@ export default function Component() {
     data?.generalSettings;
   const primaryMenu = data?.headerMenuItems?.nodes ?? [];
   const footerMenu = data?.footerMenuItems?.nodes ?? [];
+<<<<<<< HEAD
   const allStories = data?.allPosts?.edges ?? [];
   console.log(allStories)
+=======
+  const posts = data?.allPosts?.edges ?? [];
+  // console.log(stories);
+>>>>>>> 5c29d20 (home)
 
   return (
     <>
@@ -34,43 +45,52 @@ export default function Component() {
       />
       <Main>
         <Container>
-          <div className="">
-
-            <Link href="/sample-page/" className="group relative block bg-black">
-              <div>
-              <img
-                  alt="Developer"
-                  src="https://images.unsplash.com/photo-1603871165848-0aa92c869fa1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"
-                  className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
-              />
-
-              <div className="relative p-4 sm:p-6 lg:p-8">
-                <p className="text-sm font-medium uppercase tracking-widest text-pink-500">
-                  Developer
-                </p>
-
-                <p className="text-xl font-bold text-white sm:text-2xl">Tony Wayne</p>
-
-                <div className="mt-32 sm:mt-48 lg:mt-64">
-                  <div
-                      className="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
-                  >
-                    <p className="text-sm text-white">
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis
-                      perferendis hic asperiores quibusdam quidem voluptates doloremque
-                      reiciendis nostrum harum. Repudiandae?
-                    </p>
+          <div className={styles.card__container}>
+            {posts.map((post) => {
+              console.log(post)
+              return (
+                <Link index={post.id} href={post.node.uri}>
+                  <div className={styles.card}>
+                    <div
+                      className={styles.card__cover}
+                      style={{
+                        backgroundImage: `url(${post.node.featuredImage.node.sourceUrl})`,
+                      }}
+                    >
+                      {post.node.categories && (
+                        <div className={styles.cat__container}>
+                          {post.node.categories.nodes.map((cat, index) => {
+                            return (
+                              <div className={styles.card__tag}>{cat.name}</div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                    <div className={styles.card__body}>
+                      <div className={styles.card__title}>
+                        {post.node.title}
+                      </div>
+                      <div
+                        className={styles.card__desc}
+                        dangerouslySetInnerHTML={{
+                          __html: post.node.excerpt.substring(0, 100),
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              </div>
-              </div>
-            </Link>
+                </Link>
 
-          </div>
-          {/*<Hero title={'Front Page'} />*/}
-          <div className="text-center">
-            <p>This page is utilizing the "front-page" WordPress template.</p>
-            <code>wp-templates/front-page.js</code>
+                //   title={post.node.title}
+                //   content={post.node.content}
+                //   date={post.node.date}
+                //   author={post.node.author?.node.name}
+                //   uri={post.node.uri}
+                //   featuredImage={post.node.featuredImage?.node}
+                //   categories={post.node.categories}
+                // />
+              );
+            })}
           </div>
         </Container>
       </Main>
@@ -86,6 +106,36 @@ Component.query = gql`
     $headerLocation: MenuLocationEnum
     $footerLocation: MenuLocationEnum
   ) {
+    allPosts: posts(where: { orderby: { field: DATE, order: DESC } }) {
+      edges {
+        node {
+          id
+          date
+          title
+          content
+          uri
+          excerpt
+          author {
+            node {
+              name
+            }
+          }
+          categories {
+            nodes {
+              description
+              name
+              uri
+            }
+          }
+          featuredImage {
+            node {
+              altText
+              sourceUrl
+            }
+          }
+        }
+      }
+    }
     generalSettings {
       ...BlogInfoFragment
     }

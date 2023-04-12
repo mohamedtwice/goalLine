@@ -10,7 +10,9 @@ export default function Post({
   author,
   uri,
   featuredImage,
+  categories,
 }) {
+  console.log(categories);
   return (
     <article className={styles.component}>
       {featuredImage && (
