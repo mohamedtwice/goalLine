@@ -13,6 +13,7 @@ import {
 } from '../components';
 import styles from "../components/Post/Post.module.scss";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Component() {
   const { data } = useQuery(Component.query, {
@@ -35,19 +36,92 @@ export default function Component() {
         menuItems={primaryMenu}
       />
       <Main>
-        <Container>
+
+        <div className="bg-yellow-700 bg-opacity-10 px-5 py-10">
+          <div className="container grid grid-cols-12 md:gap-10 font-serif mx-auto">
+
+            <div className="md:col-span-4 col-span-12 space-y-12 py-6 flex flex-col">
+              {allStories.slice(0, 3).map((post) => {
+                return (
+                    <div className="flex flex-col">
+                      <h3 className="flex items-center font-sans font-bold text-xs text-gray-600 text-opacity-40 mb-3.5">
+                        <span className="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 mr-2.5"></span>
+                        {post.node.categories && (
+                            <div>
+                              {post.node.categories.nodes.map((cat, index) => {
+                                console.log(post)
+                                return (
+                                    <span className="after:content-['_➕_'] last-of-type:after:content-['']">{cat.name}</span>
+                                );
+                              })}
+                            </div>
+                        )}
+                        {/*Headlines*/}
+                      </h3>
+                      <a href="#" className="font-medium hover:underline">{post.node.title}</a>
+                      <p className="text-gray-600 text-opacity-40 text-xs mt-3.5 font-sans">36 minutes ago by
+                        <a href="#" className="text-blue-400 hover:underline">&nbsp;{post.node.author.node.name}</a>
+                      </p>
+                    </div>
+                )
+              })}
+              <div className="flex flex-col w-full">
+                <div className="w-full flex h-0.5 bg-yellow-700 bg-opacity-10">
+                  <div className="w-1/2 bg-red-500 h-full">
+                  </div>
+                </div>
+                <a href="#" className="font-sans text-xs font-bold pt-5 flex w-full">SEE MORE HEADLINES
+
+                  <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"
+                       stroke-linejoin="round" className="w-3.5 ml-auto text-red-500">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg></a>
+              </div>
+            </div>
+
+            <div
+                className="xl:col-span-8 lg:col-span-8 md:col-span-8 col-span-12 relative bg-cover bg-no-repeat bg-center flex"
+                style={{backgroundImage:"url('https://images.unsplash.com/photo-1602196885350-c986e02d0b79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=929&q=80')"}}>
+              {/*<Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />*/}
+
+              <span
+                  className="text-xs font-sans font-bold text-white absolute left-6 top-6 pb-2.5 border-b-2 border-red-500">ISTANBUL, TURKEY</span>
+              <div
+                  className="flex flex-col items-center justify-end text-center pt-48 flex-grow-1 px-12 pb-10 bg-gradient-to-t from-black">
+                <h3 className="flex items-center font-sans font-bold text-xs text-red-500 mb-4">
+                  <span className="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 mr-2.5"></span>
+                  IN THE MIDDLE
+                </h3>
+                <a href="#" className="text-white text-3xl hover:underline leading-10">Flannel single-origin coffee
+                  trust fund, ethical before they sold out tilde</a>
+                <p className="text-white text-opacity-50 text-xs mt-4 font-sans">36 minutes ago by <a href="#"
+                                                                                                      className="text-blue-400 hover:underline">Holden
+                  Caulfield</a></p>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <div className="px-5 py-10 md:py-20">
+          <div className="container mx-auto">
           <div className={styles.card__container}>
             {allStories.map((post) => {
               console.log(post)
               return (
                 <Link index={post.id} href={post.node.uri}>
                   <div className={styles.card}>
-                    <div
-                      className={styles.card__cover}
-                      style={{
-                        backgroundImage: `url(${post.node.featuredImage.node.sourceUrl})`,
-                      }}
-                    >
+                    {/*<div*/}
+                    {/*  className={styles.card__cover}*/}
+                    {/*  style={{*/}
+                    {/*    backgroundImage: `url(${post.node.featuredImage.node.sourceUrl})`,*/}
+                    {/*  }}*/}
+                    {/*>*/}
+                    <div className="relative min-h-[250px]">
+                     <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
                       {post.node.categories && (
                         <div className={styles.cat__container}>
                           {post.node.categories.nodes.map((cat, index) => {
@@ -83,7 +157,8 @@ export default function Component() {
               );
             })}
           </div>
-        </Container>
+        </div>
+        </div>
       </Main>
       <Footer title={siteTitle} menuItems={footerMenu} />
     </>
@@ -146,6 +221,11 @@ Component.query = gql`
             srcSet
           }
         }
+        author {
+                node {
+                  name
+                }
+              }
         categories {
           nodes {
             categoryId
