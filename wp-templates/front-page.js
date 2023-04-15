@@ -41,9 +41,8 @@ export default function Component() {
       />
       <Main>
 
-        <div className="bg-yellow-700 bg-opacity-10 px-5 py-10">
-          <div className="container grid grid-cols-12 md:gap-10 font-serif mx-auto">
-
+        <div className="bg-yellow-700 bg-opacity-10 py-10">
+          <div className="container mx-auto grid grid-cols-12 md:gap-10 font-serif max-w-[1200px] w-full px-8">
             <div className="md:col-span-4 col-span-12 space-y-12 py-6 flex flex-col">
               {allStories.slice(0, 3).map((post) => {
                 return (
@@ -55,7 +54,9 @@ export default function Component() {
                               {post.node.categories.nodes.map((cat, index) => {
                                 // console.log(post)
                                 return (
+                                    <Link href={cat.uri}>
                                     <span className="after:content-['_➕_'] last-of-type:after:content-['']">{cat.name}</span>
+                                    </Link>
                                 );
                               })}
                             </div>
@@ -103,10 +104,12 @@ export default function Component() {
                       {post.node.categories.nodes.map((cat, index) => {
                         console.log(post)
                         return (
+                            <Link href={cat.uri} className="z-50">
                             <h3 className="flex flex-row items-center font-sans font-bold text-xs text-red-500 mb-4">
                               <span className="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 mr-2.5"></span>
                               {cat.name}
                             </h3>
+                            </Link>
                         );
                       })}
                     </div>
@@ -153,7 +156,9 @@ export default function Component() {
                         <div className={styles.cat__container}>
                           {post.node.categories.nodes.map((cat, index) => {
                             return (
+                                <Link href={cat.uri}>
                               <div className={styles.card__tag}>{cat.name}</div>
+                                </Link>
                             );
                           })}
                         </div>
