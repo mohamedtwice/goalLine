@@ -72,8 +72,8 @@ export default function Component() {
                 </div>
                 <a href="#" className="font-sans text-xs font-bold pt-5 flex w-full">SEE MORE HEADLINES
 
-                  <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round"
-                       stroke-linejoin="round" className="w-3.5 ml-auto text-red-500">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
+                       strokeLinejoin="round" className="w-3.5 ml-auto text-red-500">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                   </svg></a>
@@ -81,24 +81,46 @@ export default function Component() {
             </div>
 
             <div
-                className="xl:col-span-8 lg:col-span-8 md:col-span-8 col-span-12 relative bg-cover bg-no-repeat bg-center flex"
-                style={{backgroundImage:"url('https://images.unsplash.com/photo-1602196885350-c986e02d0b79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=929&q=80')"}}>
-              {/*<Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />*/}
+                className="xl:col-span-8 lg:col-span-8 md:col-span-8 col-span-12 relative bg-cover bg-no-repeat bg-center flex order-first">
+                {/*style={{backgroundImage:"url('https://images.unsplash.com/photo-1602196885350-c986e02d0b79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=929&q=80')"}}>*/}
 
-              <span
+              {allStories.slice(0, 1).map((post) => {
+                return (
+                    <>
+              <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
+              <div className="z-50 h-screen w-full">
+                      <span
                   className="text-xs font-sans font-bold text-white absolute left-6 top-6 pb-2.5 border-b-2 border-red-500">ISTANBUL, TURKEY</span>
               <div
-                  className="flex flex-col items-center justify-end text-center pt-48 flex-grow-1 px-12 pb-10 bg-gradient-to-t from-black">
-                <h3 className="flex items-center font-sans font-bold text-xs text-red-500 mb-4">
-                  <span className="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 mr-2.5"></span>
-                  IN THE MIDDLE
-                </h3>
-                <a href="#" className="text-white text-3xl hover:underline leading-10">Flannel single-origin coffee
-                  trust fund, ethical before they sold out tilde</a>
-                <p className="text-white text-opacity-50 text-xs mt-4 font-sans">36 minutes ago by <a href="#"
-                                                                                                      className="text-blue-400 hover:underline">Holden
-                  Caulfield</a></p>
+                  className="flex flex-col items-center justify-end text-center pt-48 flex-grow-1 px-12 pb-10 bg-gradient-to-t from-black h-full">
+
+                {post.node.categories && (
+                    <div className="flex flex-row gap-4 flex-wrap">
+                      {post.node.categories.nodes.map((cat, index) => {
+                        console.log(post)
+                        return (
+                            <h3 className="flex flex-row items-center font-sans font-bold text-xs text-red-500 mb-4">
+                              <span className="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 mr-2.5"></span>
+                              {cat.name}
+                            </h3>
+                        );
+                      })}
+                    </div>
+                )}
+
+                <a href="#" className="text-white text-3xl hover:underline leading-10">
+                  {post.node.title}
+                </a>
+                <p className="text-white text-opacity-50 text-xs mt-4 font-sans">36 minutes ago by
+                  <a href="#" className="text-blue-400 hover:underline">
+                    &nbsp;{post.node.author.node.name}
+                  </a>
+                </p>
               </div>
+              </div>
+                    </>
+              )
+              })}
             </div>
 
 
