@@ -14,6 +14,10 @@ import {
 import styles from "../components/Post/Post.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import React from "react";
+import { parseISO } from 'date-fns';
+import format from 'date-fns/format';
+import { enUS } from 'date-fns/locale';
 
 export default function Component() {
   const { data } = useQuery(Component.query, {
@@ -49,7 +53,7 @@ export default function Component() {
                         {post.node.categories && (
                             <div>
                               {post.node.categories.nodes.map((cat, index) => {
-                                console.log(post)
+                                // console.log(post)
                                 return (
                                     <span className="after:content-['_➕_'] last-of-type:after:content-['']">{cat.name}</span>
                                 );
@@ -133,6 +137,7 @@ export default function Component() {
           <div className={styles.card__container}>
             {allStories.map((post) => {
               console.log(post)
+              const formattedDate = format(parseISO(post.node.date), "MMMM do, YYY", { locale: enUS })
               return (
                 <Link index={post.id} href={post.node.uri}>
                   <div className={styles.card}>
@@ -158,6 +163,7 @@ export default function Component() {
                       <div className={styles.card__title}>
                         {post.node.title}
                       </div>
+                      <p className="-mt-2 mb-1">{formattedDate}</p>
                       <div
                         className={styles.card__desc}
                         dangerouslySetInnerHTML={{
@@ -181,6 +187,86 @@ export default function Component() {
           </div>
         </div>
         </div>
+
+        <section className=" py-12 md:py-16">
+          <div className="container mx-auto px-8 max-w-[1200px] w-full">
+          <div className="max-w-xl mb-6">
+            <h2
+                // className="text-4xl font-bold tracking-tight sm:text-5xl border-b-4 border-afroRed pb-6 text-afroRed">
+                className="text-4xl font-bold tracking-tight sm:text-5xl border-b-4 border-white pb-6 text-gray-800">
+              Latest News
+            </h2>
+            <span className="inline-block mt-5 italic text-base text-gray-700 bg-white px-4 py-1 rounded-2xl">Scroll to the right for more &#8594;</span>
+          </div>
+
+          <div className={styles.big_cards_js}>
+            {/*<div className={styles.big_cards_js_gradient_left} />*/}
+            {/*<div className={styles.big_cards_js_gradient_right} />*/}
+            <div className={styles.tailwind_cards_here}>
+                {allStories.map((story, index) => {
+
+                const title = story.node.title;
+                const slug = story.node.slug;
+                const formattedDate = format(parseISO(story.node.date), "MMMM do, YYY", { locale: enUS })
+                const categories = story.node.categories;
+                const img = story.node.featuredImage?.node?.sourceUrl;
+
+                return (
+                    <div key={index} className={styles.card1}>
+                      <Link href={`/news/${slug}`}>
+                        <a>
+                          {img &&
+                              <div className="bg-white">
+                                <Image
+                                    className="object-cover w-full h-56 lg:h-72"
+                                    src={img}
+                                    alt="Picture of the author"
+                                    width={500}
+                                    height={300}
+                                    loading="lazy"
+                                />
+                              </div>
+                          }
+
+                          <div className="p-6 bg-white">
+                            <h5 className="text-xl font-bold whitespace-pre-wrap">
+                              {title}
+                            </h5>
+
+                            <p className="mt-2 text-sm text-gray-500 whitespace-pre-wrap">
+                              {formattedDate}
+                            </p>
+
+                            <div
+                                className="inline-block pb-1 mt-4 font-medium text-blue-600 border-b border-blue-500 "
+                            >
+                              <Link href={`/news/${slug}`}>
+                                <a>
+                                  Read story
+                                  <span aria-hidden="true">&rarr;</span>
+                                </a>
+                              </Link>
+                            </div>
+                          </div>
+                        </a>
+                      </Link>
+                    </div>
+                )
+              })}
+            </div>
+          </div>
+          <div className="max-w-xl mb-10">
+            <Link href={'/news/'}>
+              <a>
+                <p className="mt-10 text-2xl font-bold tracking-tight  text-white">
+                  View all news &#8594;
+                </p>
+              </a>
+            </Link>
+          </div>
+          </div>
+        </section>
+
       </Main>
       <Footer title={siteTitle} menuItems={footerMenu} />
     </>

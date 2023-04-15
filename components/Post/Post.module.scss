@@ -95,3 +95,57 @@
 .card__desc p {
   line-height: 1.5 !important;
 }
+
+
+
+
+
+
+.big_cards_js {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.big_cards_js_gradient_left, .big-cards_js_gradient_right {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2.6em;
+  background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+}
+.big-cards_js_gradient_right {
+  left: auto;
+  right: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);
+}
+
+.tailwind_cards_here {
+  /* Optional - if you want a bit of a buffer either side, add left and right padding to the tailwind card parent element the same with of the gradient divs above */
+  /*padding-left: 2.6em;*/
+  /*padding-right: 2.6em;*/
+}
+
+
+
+/* You may not need styles below this line if Tailwind has already got them covered */
+
+.tailwind_cards_here {
+  -webkit-overflow-scrolling: touch;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.card1 {
+  @apply inline-flex w-[300px] sm:w-[400px] mr-8 flex-col justify-around
+}
+/*.card {*/
+/*    display: inline-flex;*/
+/*    width: 300px;*/
+/*    !*height: 435px;*!*/
+/*    !*background: #000;*!*/
+/*    margin-right: 25px;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-around;*/
+/*}*/
