@@ -24,7 +24,7 @@ export default function Header({
                   <Image alt={title} layout="fixed" height="51px" width="50px" src="https://cms.goallineextended.com/wp-content/uploads/2023/04/gle-whiteicon.png" />
               </Link>
           </div>
-          <nav className=' thisclass flex flex-row vertical-align-middle overflow-x-auto whitespace-nowrap col-span-9 md:col-span-10 items-center text-white gap-6git  md:gap-8 uppercase font-bold'>
+          <nav className=' thisclass flex flex-row vertical-align-middle overflow-x-auto whitespace-nowrap col-span-9 md:col-span-10 items-center text-white gap-6  md:gap-8 uppercase font-bold'>
               <Link href="/" className='nav-item no-underline px-3 text-gray-100 text-xl uppercase font-bold hover:text-[#03146e]'>Home</Link>
               <Link href="category/headlines" className='nav-item no-underline px-3 text-gray-100 text-xl uppercase font-bold hover:text-[#03146e]'>Headlines</Link>
                   <Link href="category/scores" className='nav-item no-underline px-3 text-gray-100 text-xl uppercase font-bold hover:text-[#03146e]'>Scores</Link>
