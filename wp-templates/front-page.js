@@ -41,7 +41,7 @@ export default function Component() {
       />
       <Main>
 
-        <div className="bg-yellow-700 bg-opacity-10 py-10">
+        <div className="bg-[#b1b1bd] bg-opacity-10 py-10">
           <div className="container mx-auto grid grid-cols-12 md:gap-10 font-serif max-w-[1200px] w-full px-8">
             <div className="md:col-span-4 col-span-12 space-y-12 py-6 flex flex-col">
               {allStories.slice(0, 3).map((post) => {
@@ -93,7 +93,7 @@ export default function Component() {
                 return (
                     <>
               <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
-              <div className="z-50 h-screen w-full">
+              <div className="z-50 w-full">
                       <span
                   className="text-xs font-sans font-bold text-white absolute left-6 top-6 pb-2.5 border-b-2 border-red-500">ISTANBUL, TURKEY</span>
               <div
@@ -136,7 +136,7 @@ export default function Component() {
 
 
         <div className="px-5 py-10 md:py-20">
-          <div className="container mx-auto">
+          <div className="container mx-auto max-w-[1200px] w-full px-8">
           <div className={styles.card__container}>
             {allStories.map((post) => {
               console.log(post)
