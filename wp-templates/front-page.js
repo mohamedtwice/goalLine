@@ -77,7 +77,7 @@ export default function Component() {
                   <div className="w-1/2 bg-red-500 h-full">
                   </div>
                 </div>
-                <a href="#" className="font-sans text-xs font-bold pt-5 flex w-full">SEE MORE HEADLINES
+                <a href="/category/headlines/" className="font-sans text-xs font-bold pt-5 flex w-full">SEE MORE HEADLINES
 
                   <svg viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round"
                        strokeLinejoin="round" className="w-3.5 ml-auto text-red-500">
@@ -198,14 +198,14 @@ export default function Component() {
 
         <section className=" py-12 md:py-16">
           <div className="container mx-auto px-8 max-w-[1200px] w-full">
-          <div className="max-w-xl mb-6">
-            <h2
-                // className="text-4xl font-bold tracking-tight sm:text-5xl border-b-4 border-afroRed pb-6 text-afroRed">
-                className="text-4xl font-bold tracking-tight sm:text-5xl border-b-4 border-white pb-6 text-gray-800">
-              Latest News
-            </h2>
-            <span className="inline-block mt-5 italic text-base text-gray-700 bg-white px-4 py-1 rounded-2xl">Scroll to the right for more &#8594;</span>
-          </div>
+          {/*<div className="max-w-xl mb-6">*/}
+          {/*  <h2*/}
+          {/*      // className="text-4xl font-bold tracking-tight sm:text-5xl border-b-4 border-afroRed pb-6 text-afroRed">*/}
+          {/*      className="text-4xl font-bold tracking-tight sm:text-5xl border-b-4 border-white pb-6 text-gray-800">*/}
+          {/*    Latest News*/}
+          {/*  </h2>*/}
+          {/*  <span className="inline-block mt-5 italic text-base text-gray-700 bg-white px-4 py-1 rounded-2xl">Scroll to the right for more &#8594;</span>*/}
+          {/*</div>*/}
 
           <div className={styles.big_cards_js}>
             {/*<div className={styles.big_cards_js_gradient_left} />*/}
@@ -221,7 +221,7 @@ export default function Component() {
 
                 return (
                     <div key={index} className={styles.card1}>
-                      <Link href={`/news/${slug}`}>
+                      <Link href={`{story.node.uri}`}>
                         <a>
                           {img &&
                               <div className="bg-white">
@@ -248,7 +248,7 @@ export default function Component() {
                             <div
                                 className="inline-block pb-1 mt-4 font-medium text-blue-600 border-b border-blue-500 "
                             >
-                              <Link href={`/news/${slug}`}>
+                              <Link href={`${story.node.uri}`}>
                                 <a>
                                   Read story
                                   <span aria-hidden="true">&rarr;</span>
@@ -263,20 +263,11 @@ export default function Component() {
               })}
             </div>
           </div>
-          <div className="max-w-xl mb-10">
-            <Link href={'/news/'}>
-              <a>
-                <p className="mt-10 text-2xl font-bold tracking-tight  text-white">
-                  View all news &#8594;
-                </p>
-              </a>
-            </Link>
-          </div>
           </div>
         </section>
 
 
-        <section className=" py-12 md:py-16">
+        <section className="bg-black py-12 md:py-16">
           <div className="container mx-auto px-8 max-w-[1200px] w-full">
             <div className="max-w-screen mx-auto sm:p-10 relative">
               <div className="lg:flex">
@@ -289,30 +280,30 @@ export default function Component() {
                   <div className="relative h-full w-full flex items-end justify-start text-left bg-cover bg-center min-h-[300px]">
                        {/*style={{minHeight: "300px", backgroundImage: "url(https://media.gettyimages.com/photos/at-the-the-network-tolo-televised-debate-dr-abdullah-abdullah-with-picture-id1179614034?k=6&m=1179614034&s=612x612&w=0&h=WwIX3RMsOQEn5DovD9J3e859CZTdxbHHD3HRyrgU3A8=)",}}>*/}
                     <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
-                    <div
-                        className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
-                    <div className="absolute top-0 right-0 left-0 mx-6 mt-4 flex justify-between items-center">
-                      {post.node.categories.nodes.map((cat, index) => {
+                    <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
+                    <div className="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-start flex-wrap ">
+                      <div className="flex-auto flex flex-row flex-wrap w-[85%]">
+                        {post.node.categories.nodes.map((cat, index) => {
                         console.log(post)
                         return (
                             <Link href={cat.uri} className="z-50">
-                              <h3 className="flex flex-row items-center gap-4 text-xs bg-indigo-600 text-white px-5 py-2 uppercase hover:bg-white hover:text-indigo-600 transition ease-in-out duration-500 mr-4 flex-wrap">
+                              <h3 className="flex flex-row items-center gap-4 text-xs bg-indigo-600 text-white px-5 py-2 uppercase hover:bg-white hover:text-indigo-600 transition ease-in-out duration-500 mr-4 flex-wrap mb-2">
                                 {cat.name}
                               </h3>
                             </Link>
                         );
                       })}
-
-                      <div className="text-white font-regular flex flex-col justify-start">
+                      </div>
+                      <div className="text-white font-regular flex flex-col justify-start flex-none w-[15%]">
                         <span className="text-3xl leading-0 font-semibold">{formattedDay}</span>
                         <span className="-mt-3">{formattedMonth}</span>
                       </div>
                     </div>
-                    <main className="p-8 z-10">
-                      <a href="#"
+                    <main className="p-8 z-10 text-xl tracking-tight font-semibold leading-7 mb-3 inline-block text-white hover:underline">
+                      <Link href={post.node.uri}
                          className="text-xl tracking-tight font-semibold leading-7 mb-3 inline-block text-white hover:underline">
                         {post.node.title}
-                      </a>
+                      </Link>
                       <p className="text-gray-200 text-xs">
                         By <a href="#" className="text-white font-semibold hover:underline">{post.node.author.node.name}</a>&nbsp;&nbsp;|&nbsp;&nbsp;5 mins read
                       </p>
@@ -323,8 +314,7 @@ export default function Component() {
                 </div>
 
 
-                <div className="lg:w-6/12 md:grid grid-cols-2 grid-rows-2">
-
+                <div className="lg:w-6/12 md:grid grid-cols-2 grid-rows-2 flex-wrap">
                   {allStories.slice(1, 5).map((post) => {
                     const formattedMonth = format(parseISO(post.node.date), "LLL", { locale: enUS })
                     const formattedDay = format(parseISO(post.node.date), "d", { locale: enUS })
@@ -332,21 +322,21 @@ export default function Component() {
                         <div className="relative w-full flex items-end justify-start text-left bg-cover bg-center min-h-[300px]">
                              {/*style={{minHeight: "300px", backgroundImage:"url(https://media.gettyimages.com/photos/afghan-president-ashraf-ghani-arrives-to-the-welcoming-ceremony-the-picture-id694155252?k=6&m=694155252&s=612x612&w=0&h=IIJPetzJL-hAgPkE4hm2wUKvO4YOav8jJp484CgLEUs=)",}}>*/}
                           <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
-                          <div
-                              className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
-                          <div className="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-center">
-                            {post.node.categories.nodes.map((cat, index) => {
+                          <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
+                          <div className="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-start flex-wrap ">
+                            <div className="flex-auto flex flex-row flex-wrap w-[85%]">
+                              {post.node.categories.nodes.map((cat, index) => {
                               console.log(post)
                               return (
                                   <Link href={cat.uri} className="z-50">
-                                    <h3 className="flex flex-row items-center gap-4 text-xs bg-indigo-600 text-white px-5 py-2 uppercase hover:bg-white hover:text-indigo-600 transition ease-in-out duration-500 mr-4 flex-wrap">
+                                    <h3 className="flex flex-row items-center gap-4 text-xs bg-indigo-600 text-white px-5 py-2 uppercase hover:bg-white hover:text-indigo-600 transition ease-in-out duration-500 mr-4 flex-wrap mb-2">
                                       {cat.name}
                                     </h3>
                                   </Link>
                               );
                             })}
-
-                            <div className="text-white font-regular flex flex-col justify-start">
+                            </div>
+                            <div className="text-white font-regular flex flex-col justify-start flex-none w-[15%]">
                               <span className="text-3xl leading-0 font-semibold">{formattedDay}</span>
                               <span className="-mt-3">{formattedMonth}</span>
                             </div>
@@ -356,6 +346,9 @@ export default function Component() {
                                className="text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline">
                               {post.node.title}
                             </Link>
+                            <p className="text-gray-200 text-xs">
+                              By <a href="#" className="text-white font-semibold hover:underline">{post.node.author.node.name}</a>&nbsp;&nbsp;|&nbsp;&nbsp;5 mins read
+                            </p>
                           </main>
 
                         </div>

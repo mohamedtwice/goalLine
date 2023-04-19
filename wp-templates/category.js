@@ -60,8 +60,7 @@ export default function Component(props) {
                       <div className=" h-[450px] relative w-full flex items-end justify-start text-left bg-cover bg-center">
                         <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
 
-                        <div
-                            className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
+                        <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
                         <div className="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-start flex-wrap ">
                           <div className="flex-auto flex flex-row flex-wrap w-[85%]">
                           {post.node.categories.nodes.map((cat, index) => {
@@ -76,8 +75,8 @@ export default function Component(props) {
                           })}
                         </div>
                           <div className="text-white font-regular flex flex-col justify-start flex-none w-[15%]">
-                            <span className="text-3xl leading-0 font-semibold">{formattedDay}</span>
-                            <span className="-mt-3">{formattedMonth}</span>
+                            <span className="text-3xl md:text-5xl leading-0 text-white font-semibold">{formattedDay}</span>
+                            <span className="-mt-2 text-xl text-center text-white">{formattedMonth}</span>
                           </div>
                         </div>
                         <main className="p-5 z-10">
