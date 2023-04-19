@@ -18,6 +18,7 @@ import React from "react";
 import { parseISO } from 'date-fns';
 import format from 'date-fns/format';
 import { enUS } from 'date-fns/locale';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 export default function Component() {
   const { data } = useQuery(Component.query, {
@@ -44,7 +45,8 @@ export default function Component() {
         <div className="bg-[#b1b1bd] bg-opacity-10 py-10">
           <div className="container mx-auto grid grid-cols-12 md:gap-10 font-serif max-w-[1200px] w-full px-8">
             <div className="md:col-span-4 col-span-12 space-y-12 py-6 flex flex-col">
-              {allStories.slice(0, 3).map((post) => {
+              {allStories.slice(1, 4).map((post) => {
+                const dated = formatDistanceToNow(parseISO(post.node.date), )
                 return (
                     <div className="flex flex-col">
                       <h3 className="flex items-center font-sans font-bold text-xs text-gray-600 text-opacity-40 mb-3.5">
@@ -64,7 +66,7 @@ export default function Component() {
                         {/*Headlines*/}
                       </h3>
                       <a href="#" className="font-medium hover:underline">{post.node.title}</a>
-                      <p className="text-gray-600 text-opacity-40 text-xs mt-3.5 font-sans">36 minutes ago by
+                      <p className="text-gray-600 text-opacity-40 text-xs mt-3.5 font-sans">{dated} by
                         <a href="#" className="text-blue-400 hover:underline">&nbsp;{post.node.author.node.name}</a>
                       </p>
                     </div>
@@ -90,6 +92,7 @@ export default function Component() {
                 {/*style={{backgroundImage:"url('https://images.unsplash.com/photo-1602196885350-c986e02d0b79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=929&q=80')"}}>*/}
 
               {allStories.slice(0, 1).map((post) => {
+                const dated = formatDistanceToNow(parseISO(post.node.date), )
                 return (
                     <>
               <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
@@ -118,7 +121,7 @@ export default function Component() {
                 <a href="#" className="text-white text-3xl hover:underline leading-10">
                   {post.node.title}
                 </a>
-                <p className="text-white text-opacity-50 text-xs mt-4 font-sans">36 minutes ago by
+                <p className="text-white text-opacity-50 text-xs mt-4 font-sans">{dated} by
                   <a href="#" className="text-blue-400 hover:underline">
                     &nbsp;{post.node.author.node.name}
                   </a>
@@ -271,6 +274,101 @@ export default function Component() {
           </div>
           </div>
         </section>
+
+
+        <section className=" py-12 md:py-16">
+          <div className="container mx-auto px-8 max-w-[1200px] w-full">
+            <div className="max-w-screen mx-auto sm:p-10 relative">
+              <div className="lg:flex">
+
+                <div className="lg:w-6/12">
+                  {allStories.slice(0, 1).map((post) => {
+                    const formattedMonth = format(parseISO(post.node.date), "LLL", { locale: enUS })
+                    const formattedDay = format(parseISO(post.node.date), "d", { locale: enUS })
+                    return (
+                  <div className="relative h-full w-full flex items-end justify-start text-left bg-cover bg-center min-h-[300px]">
+                       {/*style={{minHeight: "300px", backgroundImage: "url(https://media.gettyimages.com/photos/at-the-the-network-tolo-televised-debate-dr-abdullah-abdullah-with-picture-id1179614034?k=6&m=1179614034&s=612x612&w=0&h=WwIX3RMsOQEn5DovD9J3e859CZTdxbHHD3HRyrgU3A8=)",}}>*/}
+                    <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
+                    <div
+                        className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
+                    <div className="absolute top-0 right-0 left-0 mx-6 mt-4 flex justify-between items-center">
+                      {post.node.categories.nodes.map((cat, index) => {
+                        console.log(post)
+                        return (
+                            <Link href={cat.uri} className="z-50">
+                              <h3 className="flex flex-row items-center gap-4 text-xs bg-indigo-600 text-white px-5 py-2 uppercase hover:bg-white hover:text-indigo-600 transition ease-in-out duration-500 mr-4 flex-wrap">
+                                {cat.name}
+                              </h3>
+                            </Link>
+                        );
+                      })}
+
+                      <div className="text-white font-regular flex flex-col justify-start">
+                        <span className="text-3xl leading-0 font-semibold">{formattedDay}</span>
+                        <span className="-mt-3">{formattedMonth}</span>
+                      </div>
+                    </div>
+                    <main className="p-8 z-10">
+                      <a href="#"
+                         className="text-xl tracking-tight font-semibold leading-7 mb-3 inline-block text-white hover:underline">
+                        {post.node.title}
+                      </a>
+                      <p className="text-gray-200 text-xs">
+                        By <a href="#" className="text-white font-semibold hover:underline">{post.node.author.node.name}</a>&nbsp;&nbsp;|&nbsp;&nbsp;5 mins read
+                      </p>
+                    </main>
+
+                  </div>
+                        )})}
+                </div>
+
+
+                <div className="lg:w-6/12 md:grid grid-cols-2 grid-rows-2">
+
+                  {allStories.slice(1, 5).map((post) => {
+                    const formattedMonth = format(parseISO(post.node.date), "LLL", { locale: enUS })
+                    const formattedDay = format(parseISO(post.node.date), "d", { locale: enUS })
+                    return (
+                        <div className="relative w-full flex items-end justify-start text-left bg-cover bg-center min-h-[300px]">
+                             {/*style={{minHeight: "300px", backgroundImage:"url(https://media.gettyimages.com/photos/afghan-president-ashraf-ghani-arrives-to-the-welcoming-ceremony-the-picture-id694155252?k=6&m=694155252&s=612x612&w=0&h=IIJPetzJL-hAgPkE4hm2wUKvO4YOav8jJp484CgLEUs=)",}}>*/}
+                          <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
+                          <div
+                              className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
+                          <div className="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-center">
+                            {post.node.categories.nodes.map((cat, index) => {
+                              console.log(post)
+                              return (
+                                  <Link href={cat.uri} className="z-50">
+                                    <h3 className="flex flex-row items-center gap-4 text-xs bg-indigo-600 text-white px-5 py-2 uppercase hover:bg-white hover:text-indigo-600 transition ease-in-out duration-500 mr-4 flex-wrap">
+                                      {cat.name}
+                                    </h3>
+                                  </Link>
+                              );
+                            })}
+
+                            <div className="text-white font-regular flex flex-col justify-start">
+                              <span className="text-3xl leading-0 font-semibold">{formattedDay}</span>
+                              <span className="-mt-3">{formattedMonth}</span>
+                            </div>
+                          </div>
+                          <main className="p-5 z-10 text-white text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline">
+                            <Link href={post.node.uri}
+                               className="text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline">
+                              {post.node.title}
+                            </Link>
+                          </main>
+
+                        </div>
+                    )
+                  })}
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
 
       </Main>
       <Footer title={siteTitle} menuItems={footerMenu} />

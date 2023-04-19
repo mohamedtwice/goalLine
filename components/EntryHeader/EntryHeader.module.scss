@@ -5,10 +5,10 @@
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 2rem;
-	background: #b1b1bd ;
+	//background: #b1b1bd ;
 
 	@media (min-width: $breakpoint-small) {
-		margin-bottom: 5rem;
+		margin-bottom: 3rem;
 	}
 }
 
@@ -25,15 +25,23 @@
 .text {
 	width: 100%;
 	max-width: 72rem;
-	padding: 8.25rem 0;
+	padding-top: 1.25rem;
+	//padding: 8.25rem 0;
 	position: relative;
 	z-index: 1; // Pull text to the foreground to sit above <FeaturedImage />.
 }
 
 .title {
 	line-height: 1.25;
-	font-size: 5rem;
+	font-size: 6rem;
 	color: var(--wpe--color--title);
+	text-align: left;
+	font-weight: 700;
+	text-transform: uppercase;
+
+	@media (max-width: $breakpoint-medium) {
+		font-size: 5rem;
+	}
 
 	@media (max-width: $breakpoint-small) {
 		font-size: 3rem;
