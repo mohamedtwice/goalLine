@@ -62,7 +62,8 @@ export default function Component(props) {
 
                         <div
                             className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
-                        <div className="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-center flex-wrap ">
+                        <div className="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-start flex-wrap ">
+                          <div className="flex-auto flex flex-row flex-wrap w-[85%]">
                           {post.node.categories.nodes.map((cat, index) => {
                             console.log(post)
                             return (
@@ -73,7 +74,8 @@ export default function Component(props) {
                                 </Link>
                             );
                           })}
-                          <div className="text-white font-regular flex flex-col justify-start flex-none">
+                        </div>
+                          <div className="text-white font-regular flex flex-col justify-start flex-none w-[15%]">
                             <span className="text-3xl leading-0 font-semibold">{formattedDay}</span>
                             <span className="-mt-3">{formattedMonth}</span>
                           </div>
