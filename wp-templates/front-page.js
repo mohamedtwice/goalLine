@@ -49,7 +49,7 @@ export default function Component() {
                 const dated = formatDistanceToNow(parseISO(post.node.date), )
                 return (
                     <div className="flex flex-col">
-                      <h3 className="flex items-center font-sans font-bold text-xs text-gray-600 text-opacity-40 mb-3.5">
+                      <p className="flex items-center font-sans font-bold text-sm text-gray-600 text-opacity-40 mb-1.5">
                         <span className="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 mr-2.5"></span>
                         {post.node.categories && (
                             <div>
@@ -57,16 +57,20 @@ export default function Component() {
                                 // console.log(post)
                                 return (
                                     <Link href={cat.uri}>
-                                    <span className="after:content-['_➕_'] last-of-type:after:content-['']">{cat.name}</span>
+                                    <span className="text-xs after:content-['_➕_'] last-of-type:after:content-['']">{cat.name}</span>
                                     </Link>
                                 );
                               })}
                             </div>
                         )}
                         {/*Headlines*/}
-                      </h3>
-                      <a href="#" className="font-medium hover:underline">{post.node.title}</a>
-                      <p className="text-gray-600 text-opacity-40 text-xs mt-3.5 font-sans">{dated} by
+                      </p>
+
+                      <span className="text-xl font-bold hover:underline">
+                        <Link href={post.node.uri}>{post.node.title}
+                      </Link>
+                      </span>
+                      <p className="text-gray-600 text-opacity-40 text-xs mt-1.5 font-sans">{dated} by
                         <a href="#" className="text-blue-400 hover:underline">&nbsp;{post.node.author.node.name}</a>
                       </p>
                     </div>
@@ -118,9 +122,12 @@ export default function Component() {
                     </div>
                 )}
 
-                <a href="#" className="text-white text-3xl hover:underline leading-10">
+
+                <span className="text-white font-bold text-3xl hover:underline leading-10">
+                  <Link href={post.node.uri}>
                   {post.node.title}
-                </a>
+                </Link>
+                  </span>
                 <p className="text-white text-opacity-50 text-xs mt-4 font-sans">{dated} by
                   <a href="#" className="text-blue-400 hover:underline">
                     &nbsp;{post.node.author.node.name}
@@ -277,7 +284,7 @@ export default function Component() {
                     const formattedMonth = format(parseISO(post.node.date), "LLL", { locale: enUS })
                     const formattedDay = format(parseISO(post.node.date), "d", { locale: enUS })
                     return (
-                  <div className="relative h-full w-full flex items-end justify-start text-left bg-cover bg-center min-h-[300px]">
+                  <div className="relative h-full w-full flex items-end justify-start text-left bg-cover bg-center min-h-[400px] lg:min-h-[300px]">
                        {/*style={{minHeight: "300px", backgroundImage: "url(https://media.gettyimages.com/photos/at-the-the-network-tolo-televised-debate-dr-abdullah-abdullah-with-picture-id1179614034?k=6&m=1179614034&s=612x612&w=0&h=WwIX3RMsOQEn5DovD9J3e859CZTdxbHHD3HRyrgU3A8=)",}}>*/}
                     <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
                     <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
@@ -300,9 +307,10 @@ export default function Component() {
                       </div>
                     </div>
                     <main className="p-8 z-10 text-xl tracking-tight font-semibold leading-7 mb-3 inline-block text-white hover:underline">
-                      <Link href={post.node.uri}
-                         className="text-xl tracking-tight font-semibold leading-7 mb-3 inline-block text-white hover:underline">
+                      <Link href={post.node.uri}>
+                         <span className="text-2xl tracking-tight font-semibold leading-7 mb-3 inline-block text-white hover:underline">
                         {post.node.title}
+                         </span>
                       </Link>
                       <p className="text-gray-200 text-xs">
                         By <a href="#" className="text-white font-semibold hover:underline">{post.node.author.node.name}</a>&nbsp;&nbsp;|&nbsp;&nbsp;5 mins read
@@ -342,9 +350,10 @@ export default function Component() {
                             </div>
                           </div>
                           <main className="p-5 z-10 text-white text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline">
-                            <Link href={post.node.uri}
-                               className="text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline">
+                            <Link href={post.node.uri}>
+                              <span className="text-xl tracking-tight font-medium leading-7 font-regular text-white hover:underline">
                               {post.node.title}
+                              </span>
                             </Link>
                             <p className="text-gray-200 text-xs">
                               By <a href="#" className="text-white font-semibold hover:underline">{post.node.author.node.name}</a>&nbsp;&nbsp;|&nbsp;&nbsp;5 mins read

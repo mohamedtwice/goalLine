@@ -67,7 +67,7 @@ export default function Component(props) {
                             console.log(post)
                             return (
                                 <Link href={cat.uri} className="z-50 flex-auto">
-                                  <h3 className="flex flex-row items-center gap-4 text-xs bg-indigo-600 text-white px-5 py-2 uppercase hover:bg-white hover:text-indigo-600 transition ease-in-out duration-500 mr-4 flex-wrap mb-2">
+                                  <h3 className="flex flex-row items-center gap-4 text-sm bg-indigo-600 text-white px-5 py-2 uppercase hover:bg-white hover:text-indigo-600 transition ease-in-out duration-500 mr-4 flex-wrap mb-2">
                                     {cat.name}
                                   </h3>
                                 </Link>
@@ -81,10 +81,10 @@ export default function Component(props) {
                         </div>
                         <main className="p-5 z-10">
                           <a href={post.node.uri}
-                             className="text-md tracking-tight font-medium leading-7 font-regular text-white hover:underline">
+                             className="text-2xl tracking-tight font-medium leading-7 font-regular text-white hover:underline">
                             {post.node.title}
                           </a>
-                          <p className="text-gray-200 text-xs">
+                          <p className="text-gray-200 text-sm">
                           By <a href="#" className="text-white font-semibold hover:underline">{post.node.author.node.name}</a>&nbsp;&nbsp;|&nbsp;&nbsp;5 mins read
                         </p>
                         </main>

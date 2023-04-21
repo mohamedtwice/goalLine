@@ -6,12 +6,14 @@ import {
   Footer,
   Main,
   Container,
-  EntryHeader,
+  EntryHeaderPosts,
   NavigationMenu,
   ContentWrapper,
   FeaturedImage,
   SEO,
 } from '../components';
+import Image from "next/image";
+import React from "react";
 
 export default function Component(props) {
   // Loading state for previews
@@ -39,12 +41,26 @@ export default function Component(props) {
       />
       <Main>
         <>
-          <EntryHeader
+          <EntryHeaderPosts
             title={title}
             image={featuredImage?.node}
             date={date}
             author={author?.node?.name}
           />
+
+          <section className="">
+            <Container>
+              <div className="relative container mx-auto px-8 w-full max-w-[1200px] bg-black min-h-[350px] lg:min-h-[450px] mb-6 md:mb-8">
+          {/*<FeaturedImage*/}
+          {/*    image={featuredImage?.node?.sourceUrl}*/}
+          {/*    className="min-w-2xl w-full mx-auto min-h-[500px]"*/}
+          {/*    priority*/}
+          {/*/>*/}
+                <Image src={featuredImage?.node?.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
+
+              </div>
+            </Container>
+          </section>
           <Container>
             <ContentWrapper content={content} />
           </Container>

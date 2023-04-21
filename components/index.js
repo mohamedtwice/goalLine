@@ -1,6 +1,7 @@
 export { Container } from './Container';
 export { ContentWrapper } from './ContentWrapper';
 export { EntryHeader } from './EntryHeader';
+export { EntryHeaderPosts } from './EntryHeaderPosts';
 export { FeaturedImage } from './FeaturedImage';
 export { Footer } from './Footer';
 export { FormatDate } from './FormatDate';

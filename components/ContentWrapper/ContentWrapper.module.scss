@@ -48,6 +48,7 @@
 			display: block;
 			height: auto;
 			max-width: 100%;
+			margin: 1.5rem auto;
 		}
 
 		.alignleft {
@@ -67,6 +68,10 @@
 			display: block;
 			margin-left: auto;
 			margin-right: auto;
+		}
+
+		iframe {
+			margin: 1.5rem auto;
 		}
 
 		code,
