@@ -40,11 +40,11 @@
 	text-transform: uppercase;
 
 	@media (max-width: $breakpoint-medium) {
-		font-size: 3.5rem;
+		font-size: 3rem;
 	}
 
 	@media (max-width: $breakpoint-small) {
-		font-size: 3rem;
+		font-size: 2rem;
 	}
 }
 
