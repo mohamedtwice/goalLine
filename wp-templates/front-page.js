@@ -19,6 +19,7 @@ import { parseISO } from 'date-fns';
 import format from 'date-fns/format';
 import { enUS } from 'date-fns/locale';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import dImg from '../public/goalline.jpg'
 
 export default function Component() {
   const { data } = useQuery(Component.query, {
@@ -47,6 +48,7 @@ export default function Component() {
             <div className="md:col-span-4 col-span-12 space-y-12 py-6 flex flex-col">
               {allStories.slice(1, 4).map((post) => {
                 const dated = formatDistanceToNow(parseISO(post.node.date), )
+
                 return (
                     <div className="flex flex-col">
                       <p className="flex items-center font-sans font-bold text-sm text-gray-600 text-opacity-40 mb-1.5">
@@ -97,9 +99,11 @@ export default function Component() {
 
               {allStories.slice(0, 1).map((post) => {
                 const dated = formatDistanceToNow(parseISO(post.node.date), )
+                const postImg = post.node.featuredImage.node.sourceUrl || dImg.src
+
                 return (
                     <>
-              <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
+              <Image src={postImg} layout="fill" objectFit="cover" objectPosition="center" />
               <div className="z-50 w-full">
                       <span
                   className="text-xs font-sans font-bold text-white absolute left-6 top-6 pb-2.5 border-b-2 border-red-500">ISTANBUL, TURKEY</span>
@@ -150,6 +154,7 @@ export default function Component() {
           <div className={styles.card__container}>
             {allStories.map((post) => {
               console.log(post)
+              const postImg = post.node?.featuredImage?.node.sourceUrl || dImg.src
               const formattedDate = format(parseISO(post.node.date), "MMMM do, YYY", { locale: enUS })
               return (
                 <Link index={post.id} href={post.node.uri}>
@@ -161,7 +166,7 @@ export default function Component() {
                     {/*  }}*/}
                     {/*>*/}
                     <div className="relative min-h-[250px]">
-                     <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
+                     <Image src={postImg} layout="fill" objectFit="cover" objectPosition="center" />
                       {post.node.categories && (
                         <div className={styles.cat__container}>
                           {post.node.categories.nodes.map((cat, index) => {
@@ -219,6 +224,7 @@ export default function Component() {
             {/*<div className={styles.big_cards_js_gradient_right} />*/}
             <div className={styles.tailwind_cards_here}>
                 {allStories.map((story, index) => {
+                  const postImg = story.node?.featuredImage?.node.sourceUrl || dImg.src
 
                 const title = story.node.title;
                 const slug = story.node.slug;
@@ -234,7 +240,7 @@ export default function Component() {
                               <div className="bg-white">
                                 <Image
                                     className="object-cover w-full h-56 lg:h-72"
-                                    src={img}
+                                    src={postImg}
                                     alt="Picture of the author"
                                     width={500}
                                     height={300}
@@ -283,10 +289,11 @@ export default function Component() {
                   {allStories.slice(0, 1).map((post) => {
                     const formattedMonth = format(parseISO(post.node.date), "LLL", { locale: enUS })
                     const formattedDay = format(parseISO(post.node.date), "d", { locale: enUS })
+                    const postImg = post.node.featuredImage.node.sourceUrl || dImg.src
                     return (
                   <div className="relative h-full w-full flex items-end justify-start text-left bg-cover bg-center min-h-[400px] lg:min-h-[300px]">
                        {/*style={{minHeight: "300px", backgroundImage: "url(https://media.gettyimages.com/photos/at-the-the-network-tolo-televised-debate-dr-abdullah-abdullah-with-picture-id1179614034?k=6&m=1179614034&s=612x612&w=0&h=WwIX3RMsOQEn5DovD9J3e859CZTdxbHHD3HRyrgU3A8=)",}}>*/}
-                    <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
+                    <Image src={postImg} layout="fill" objectFit="cover" objectPosition="center" />
                     <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
                     <div className="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-start flex-wrap ">
                       <div className="flex-auto flex flex-row flex-wrap w-[85%]">
@@ -326,10 +333,11 @@ export default function Component() {
                   {allStories.slice(1, 5).map((post) => {
                     const formattedMonth = format(parseISO(post.node.date), "LLL", { locale: enUS })
                     const formattedDay = format(parseISO(post.node.date), "d", { locale: enUS })
+                    const postImg = post.node?.featuredImage?.node.sourceUrl || dImg.src
                     return (
                         <div className="relative w-full flex items-end justify-start text-left bg-cover bg-center min-h-[300px]">
                              {/*style={{minHeight: "300px", backgroundImage:"url(https://media.gettyimages.com/photos/afghan-president-ashraf-ghani-arrives-to-the-welcoming-ceremony-the-picture-id694155252?k=6&m=694155252&s=612x612&w=0&h=IIJPetzJL-hAgPkE4hm2wUKvO4YOav8jJp484CgLEUs=)",}}>*/}
-                          <Image src={post.node.featuredImage.node.sourceUrl} layout="fill" objectFit="cover" objectPosition="center" />
+                          <Image src={postImg} layout="fill" objectFit="cover" objectPosition="center" />
                           <div className="absolute top-0 mt-20 right-0 bottom-0 left-0 bg-gradient-to-b from-transparent to-gray-900"></div>
                           <div className="absolute top-0 right-0 left-0 mx-5 mt-2 flex justify-between items-start flex-wrap ">
                             <div className="flex-auto flex flex-row flex-wrap w-[85%]">

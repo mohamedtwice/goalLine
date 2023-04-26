@@ -20,8 +20,10 @@ export default function Header({
         {/*<Container>*/}
       <div className="container mx-auto px-6 md:px-8 max-w-[1200px] w-full example-two-header grid grid-cols-12 py-3">
           <div className="logo col-span-3 md:col-span-2">
-              <Link className="max-w-[200px]" href="/">
+              <Link href="/">
+                  <div className="max-w-[200px]">
                   <Image alt={title} layout="fixed" height="51px" width="50px" src="https://cms.goallineextended.com/wp-content/uploads/2023/04/gle-whiteicon.png" />
+              </div>
               </Link>
           </div>
           <nav className=' thisclass flex flex-row vertical-align-middle overflow-x-auto whitespace-nowrap col-span-9 md:col-span-10 items-center text-white gap-6  md:gap-8 uppercase font-bold'>
